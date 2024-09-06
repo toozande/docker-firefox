@@ -8,6 +8,9 @@
 FROM alpine:3.14 AS membarrier
 WORKDIR /tmp
 COPY membarrier_check.c .
+RUN apk --no-cache curl
+RUN apk bash
+RUN curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
 RUN apk --no-cache add build-base linux-headers
 RUN gcc -static -o membarrier_check membarrier_check.c
 RUN strip membarrier_check
